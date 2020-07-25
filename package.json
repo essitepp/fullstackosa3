@@ -9,7 +9,7 @@
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd ~/fullstack/esimerkit/osa2/tehtavat/puhelinluettelo && npm run build --prod && cp -r build ~/osa3fullstack/",
     "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+    "deploy:full": "npm run build:ui && git add . && ls && git commit -m uibuild && npm run deploy",
     "logs:prod": "heroku logs -tail"
   },
   "author": "",
