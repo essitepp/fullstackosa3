@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/persons
+GET https://floating-brushlands-26219.herokuapp.com/api/persons
