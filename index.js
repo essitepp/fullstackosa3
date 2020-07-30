@@ -7,12 +7,11 @@ const Person = require('./models/person')
 app.use(express.json())
 
 const cors = require('cors')
-const { response } = require('express')
 app.use(cors())
 
 app.use(express.static('build'))
 
-morgan.token('data', function (req, res) {
+morgan.token('data', function (req) {
   const body = JSON.stringify(req.body)
   if(body !== '{}') {
     return body
@@ -25,37 +24,13 @@ app.use(morgan(
   '- :response-time ms :data'
 ))
 
-
-let persons = [
-  { 
-    name: "Arto Hellas",
-    number: "040-123456",
-    id: 1
-  },
-  {
-    name: "Ada Lovelace",
-    number: "39-44-5323523",
-    id: 4
-  },
-  {
-    name: "Dan Abramov",
-    number: "12-43-234345",
-    id: 3
-  },
-  {
-    name: "Mary Poppendieck",
-    number: "39-23-5423122",
-    id: 5
-  }
-]
-
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
 })
 
-app.get('/info', (request, response) => {
+app.get('/info', (request, response, next) => {
   const timestamp = new Date()
   Person.find({})
     .then(persons => {
@@ -67,7 +42,7 @@ app.get('/info', (request, response) => {
       )
     })
     .catch(error => next(error))
-  
+
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -84,7 +59,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
@@ -137,4 +112,3 @@ const PORT =  process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
- 

@@ -7,8 +7,8 @@ mongoose.set('useCreateIndex', true)
 const url = process.env.MONGODB_URI
 
 console.log('connecting to', url)
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
-  .then(result => {
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
     console.log('connected to MongoDB')
   })
   .catch((error) => {
@@ -23,7 +23,7 @@ const personSchema = new mongoose.Schema({
     minlength: 3
   },
   number: {
-    type: String, 
+    type: String,
     required: true,
     minlength: 8
   },

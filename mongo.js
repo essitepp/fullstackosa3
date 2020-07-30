@@ -7,11 +7,11 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const url = 
+const url =
   `mongodb+srv://fullstack:${password}@cluster0.6ik6h.mongodb.net/phonebook?retryWrites=true&w=majority`
 
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const personSchema = new mongoose.Schema({
   name: String,
@@ -26,7 +26,7 @@ if (process.argv.length === 5) {
     number: process.argv[4]
   })
 
-  person.save().then(response => {
+  person.save().then(() => {
     console.log('Person saved!')
     mongoose.connection.close()
   })
